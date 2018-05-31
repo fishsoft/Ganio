@@ -1,5 +1,8 @@
 package com.morse.ganio.mvp
 
+/**
+ * Presenter接口
+ */
 interface IPresenter<V : IView> {
 
     /**

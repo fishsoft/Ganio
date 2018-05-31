@@ -6,6 +6,9 @@ import com.morse.ganio.mvp.IPresenter
 import com.morse.ganio.mvp.IView
 import com.morse.ganio.mvp.ui.MVPCallback
 
+/**
+ * 集成MVP的Activity
+ */
 open abstract class MVPActivity<V : IView, P : IPresenter<V>> : AppCompatActivity(), IView, MVPCallback<V, P> {
 
     private var p: P? = null

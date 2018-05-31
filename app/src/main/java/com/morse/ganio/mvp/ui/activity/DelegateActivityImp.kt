@@ -5,6 +5,9 @@ import com.morse.ganio.mvp.IView
 import com.morse.ganio.mvp.ui.MVPCallback
 import com.morse.ganio.mvp.ui.MVPCallbackImp
 
+/**
+ * Activity代理
+ */
 class DelegateActivityImp<V : IView, P : IPresenter<V>> : DelegateActivity {
 
     private var callback: MVPCallbackImp<V, P>? = null

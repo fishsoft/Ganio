@@ -5,6 +5,9 @@ import java.lang.reflect.InvocationHandler
 import java.lang.reflect.Method
 import java.lang.reflect.Proxy
 
+/**
+ * Presenter基类
+ */
 open abstract class BasePresenter<V : IView> : IPresenter<V> {
 
     var v: WeakReference<V>? = null
@@ -16,11 +19,7 @@ open abstract class BasePresenter<V : IView> : IPresenter<V> {
 
     override fun attachView(v: V) {
         this.v = WeakReference(v)
-        proxy= Proxy.newProxyInstance(v.javaClass.classLoader,v.javaClass.interfaces,object : InvocationHandler{
-            override fun invoke(proxy: Any?, method: Method?, args: Array<out Any>?): Any {
-                return method!!.invoke(v,args)
-            }
-        }) as IView?
+        proxy = Proxy.newProxyInstance(v.javaClass.classLoader, v.javaClass.interfaces) { proxy, method, args -> method!!.invoke(v, args) } as IView?
     }
 
     override fun dettechView() {

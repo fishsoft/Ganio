@@ -3,6 +3,9 @@ package com.morse.ganio.mvp.ui
 import com.morse.ganio.mvp.IPresenter
 import com.morse.ganio.mvp.IView
 
+/**
+ * MVP生命周期代理
+ */
 class MVPCallbackImp<V : IView, P : IPresenter<V>> : MVPCallback<V, P> {
 
     private var callback: MVPCallback<V, P>? = null
@@ -25,15 +28,15 @@ class MVPCallbackImp<V : IView, P : IPresenter<V>> : MVPCallback<V, P> {
         callback!!.setPresenter(p)
     }
 
-    override fun getView(): V {
-        return callback!!.getView()
+    override fun getMVPView(): V {
+        return callback!!.getMVPView()
     }
 
     /**
      * 绑定View
      */
     fun attach() {
-        callback!!.getPresenter().attachView(callback!!.getView())
+        callback!!.getPresenter().attachView(callback!!.getMVPView())
     }
 
     /**

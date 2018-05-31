@@ -1,5 +1,8 @@
 package com.morse.ganio.mvp.ui.fragment
 
+/**
+ * 代理fragment生命周期
+ */
 interface DelegateFragment {
 
     /**

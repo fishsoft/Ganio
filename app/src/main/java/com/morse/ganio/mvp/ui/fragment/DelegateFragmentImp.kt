@@ -5,6 +5,9 @@ import com.morse.ganio.mvp.IView
 import com.morse.ganio.mvp.ui.MVPCallback
 import com.morse.ganio.mvp.ui.MVPCallbackImp
 
+/**
+ * Fragment生命周期代理
+ */
 class DelegateFragmentImp<V : IView, P : IPresenter<V>> : DelegateFragment {
 
     private var callback: MVPCallbackImp<V, P>? = null
