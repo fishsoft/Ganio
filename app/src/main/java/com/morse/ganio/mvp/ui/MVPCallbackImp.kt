@@ -1,5 +1,6 @@
 package com.morse.ganio.mvp.ui
 
+import android.util.Log
 import com.morse.ganio.mvp.IPresenter
 import com.morse.ganio.mvp.IView
 
@@ -9,13 +10,20 @@ import com.morse.ganio.mvp.IView
 class MVPCallbackImp<V : IView, P : IPresenter<V>> : MVPCallback<V, P> {
 
     private var callback: MVPCallback<V, P>? = null
+    private var p: P? = null
 
     constructor(callback: MVPCallback<V, P>) {
         this.callback = callback
     }
 
     override fun createPresenter(): P {
-        val p: P = callback!!.createPresenter()
+        if (null == p) {
+            p = callback!!.createPresenter();
+        }
+        if (null == p) {
+            throw NullPointerException("p is null")
+        }
+        Log.d("morse","createPresenter success")
         setPresenter(p)
         return getPresenter()
     }
@@ -44,6 +52,5 @@ class MVPCallbackImp<V : IView, P : IPresenter<V>> : MVPCallback<V, P> {
      */
     fun dettach() {
         callback!!.getPresenter().dettechView()
-        callback!!.setPresenter(null)
     }
 }

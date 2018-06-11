@@ -2,5 +2,5 @@ package com.morse.ganio.main.fragment
 
 interface IFragmentModel {
 
-    fun getFragmentInfo()
+    fun getFragmentInfo(type:Int)
 }

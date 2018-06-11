@@ -10,7 +10,7 @@ class FragmentPresenter : BasePresenter<IFragment>() {
         model = FragmentModel()
     }
 
-    fun getFragmentMsg() {
-        model!!.getFragmentInfo()
+    fun getFragmentMsg(type:Int) {
+        model!!.getFragmentInfo(type)
     }
 }

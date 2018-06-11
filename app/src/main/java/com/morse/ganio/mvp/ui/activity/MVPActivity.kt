@@ -39,7 +39,7 @@ open abstract class MVPActivity<V : IView, P : IPresenter<V>> : AppCompatActivit
     }
 
     override fun setPresenter(p: P?) {
-        this!!.p = p
+        this!!.p = p!!
     }
 
     override fun getMVPView(): V {

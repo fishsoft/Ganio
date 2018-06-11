@@ -2,9 +2,8 @@ package com.morse.ganio.mvp.ui.fragment
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.view.LayoutInflater
+import android.util.Log
 import android.view.View
-import android.view.ViewGroup
 import com.morse.ganio.mvp.IPresenter
 import com.morse.ganio.mvp.IView
 import com.morse.ganio.mvp.ui.MVPCallback
@@ -17,15 +16,21 @@ open abstract class MVPFragment<V : IView, P : IPresenter<V>> : Fragment(), IVie
     private var p: P? = null
     private var delegateFragment: DelegateFragmentImp<V, P>? = null
 
+    private var mView: View? = null
+
+    private var isCreate: Boolean? = false
+    private var isShow: Boolean? = false
+
     private fun getDelegateFragment(): DelegateFragmentImp<V, P> {
         delegateFragment = DelegateFragmentImp(this)
         return this!!.delegateFragment!!
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreate(savedInstanceState: Bundle?) {
         getDelegateFragment()
+        isCreate = true
         delegateFragment!!.onCreateView()
-        return super.onCreateView(inflater, container, savedInstanceState)
+        super.onCreate(savedInstanceState)
     }
 
     override fun createPresenter(): P {
@@ -37,7 +42,16 @@ open abstract class MVPFragment<V : IView, P : IPresenter<V>> : Fragment(), IVie
     }
 
     override fun setPresenter(p: P?) {
-        this!!.p = p
+        if (null == this) {
+            Log.d("morse", "this is null")
+        }
+        if (null == this!!.p) {
+            Log.d("morse", "this.p is null")
+        }
+        if (null == p) {
+            Log.d("morse", "p is null")
+        }
+        this!!.p = p!!
     }
 
     override fun getMVPView(): V {
@@ -48,4 +62,13 @@ open abstract class MVPFragment<V : IView, P : IPresenter<V>> : Fragment(), IVie
         delegateFragment!!.onDestroy()
         super.onDestroyView()
     }
+
+    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
+        if (isCreate!! && isShow!!) {
+            getDatas()
+        }
+
+    }
+
+    abstract fun getDatas()
 }
