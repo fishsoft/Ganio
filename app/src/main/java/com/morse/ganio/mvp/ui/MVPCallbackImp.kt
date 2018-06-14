@@ -1,6 +1,5 @@
 package com.morse.ganio.mvp.ui
 
-import android.util.Log
 import com.morse.ganio.mvp.IPresenter
 import com.morse.ganio.mvp.IView
 
@@ -17,13 +16,7 @@ class MVPCallbackImp<V : IView, P : IPresenter<V>> : MVPCallback<V, P> {
     }
 
     override fun createPresenter(): P {
-        if (null == p) {
-            p = callback!!.createPresenter();
-        }
-        if (null == p) {
-            throw NullPointerException("p is null")
-        }
-        Log.d("morse","createPresenter success")
+        p = callback!!.createPresenter()
         setPresenter(p)
         return getPresenter()
     }

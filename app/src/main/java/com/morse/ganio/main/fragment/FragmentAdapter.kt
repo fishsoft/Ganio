@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import kotlin.properties.Delegates
 
-class FragmentAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class FragmentAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var items: ArrayList<String> by Delegates.notNull()
 

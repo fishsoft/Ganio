@@ -30,6 +30,8 @@ class GankFragment : MVPFragment<IFragment, FragmentPresenter>(), IFragment {
         rvNormal = view.findViewById(R.id.rv_normal)
         rvNormal!!.adapter = FragmentAdapter()
         rvNormal!!.layoutManager = LinearLayoutManager(context)
+
+        getDatas()
         return view
     }
 
