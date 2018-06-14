@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <group android:id="@+id/ground1">
+        <item
+            android:id="@+id/nav_item0"
+            android:icon="@mipmap/ic_launcher"
+            android:title="全部"
+            app:showAsAction="ifRoom" />
+    </group>
+    <group android:id="@+id/ground2">
+        <item
+            android:id="@+id/nav_item1"
+            android:icon="@mipmap/ic_launcher"
+            android:title="全部"
+            app:showAsAction="ifRoom" />
+        <item
+            android:id="@+id/nav_item2"
+            android:icon="@mipmap/ic_launcher"
+            android:title="Android"
+            app:showAsAction="ifRoom" />
+        <item
+            android:id="@+id/nav_item3"
+            android:icon="@mipmap/ic_launcher"
+            android:title="IOS"
+            app:showAsAction="ifRoom" />
+        <item
+            android:id="@+id/nav_item4"
+            android:icon="@mipmap/ic_launcher"
+            android:title="休息视频"
+            app:showAsAction="ifRoom" />
+        <item
+            android:id="@+id/nav_item5"
+            android:icon="@mipmap/ic_launcher"
+            android:title="福利"
+            app:showAsAction="ifRoom" />
+        <item
+            android:id="@+id/nav_item6"
+            android:icon="@mipmap/ic_launcher"
+            android:title="拓展资源"
+            app:showAsAction="ifRoom" />
+        <item
+            android:id="@+id/nav_item7"
+            android:icon="@mipmap/ic_launcher"
+            android:title="前端"
+            app:showAsAction="ifRoom" />
+        <item
+            android:id="@+id/nav_item8"
+            android:icon="@mipmap/ic_launcher"
+            android:title="瞎推荐"
+            app:showAsAction="ifRoom" />
+        <item
+            android:id="@+id/nav_item9"
+            android:icon="@mipmap/ic_launcher"
+            android:title="App"
+            app:showAsAction="ifRoom" />
+        <item
+            android:id="@+id/nav_item10"
+            android:icon="@mipmap/ic_launcher"
+            android:title="闲读"
+            app:showAsAction="ifRoom" />
+    </group>
+</menu>
