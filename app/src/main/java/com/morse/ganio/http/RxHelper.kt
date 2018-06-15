@@ -22,15 +22,9 @@ class RxHelper {
          * 发布事件io线程，接收事件主线程
          */
         fun <T : Any?> rxSchedulerHelper(): ObservableTransformer<T, T> {
-//            return ObservableTransformer<T, T> {
-//                it
-//            }
             //compose处理线程
             return ObservableTransformer<T, T>() {
-                it
-//                fun apply(upstream: Observable<T>): ObservableSource<T> {
-//                    return upstream.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
-//                }
+                it.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
             }
         }
 
