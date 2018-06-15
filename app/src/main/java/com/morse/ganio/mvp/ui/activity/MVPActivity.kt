@@ -2,6 +2,7 @@ package com.morse.ganio.mvp.ui.activity
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.widget.Toast
 import com.morse.ganio.mvp.IPresenter
 import com.morse.ganio.mvp.IView
 import com.morse.ganio.mvp.ui.MVPCallback
@@ -44,6 +45,10 @@ open abstract class MVPActivity<V : IView, P : IPresenter<V>> : AppCompatActivit
 
     override fun getMVPView(): V {
         return this as V
+    }
+
+    override fun onFailed(msg: String?) {
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
     }
 
 }

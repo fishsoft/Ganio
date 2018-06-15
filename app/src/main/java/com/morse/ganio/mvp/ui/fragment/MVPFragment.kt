@@ -1,9 +1,11 @@
 package com.morse.ganio.mvp.ui.fragment
 
+import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import com.morse.ganio.mvp.IPresenter
 import com.morse.ganio.mvp.IView
 import com.morse.ganio.mvp.ui.MVPCallback
@@ -20,6 +22,8 @@ open abstract class MVPFragment<V : IView, P : IPresenter<V>> : Fragment(), IVie
 
     private var isCreate: Boolean? = false
     private var isShow: Boolean? = false
+
+    private var mContext: Context? = null
 
     private fun getDelegateFragment(): DelegateFragmentImp<V, P> {
         delegateFragment = DelegateFragmentImp(this)
@@ -67,7 +71,15 @@ open abstract class MVPFragment<V : IView, P : IPresenter<V>> : Fragment(), IVie
         if (isCreate!! && isShow!!) {
             getDatas()
         }
+    }
 
+    override fun onAttach(context: Context?) {
+        super.onAttach(context)
+        mContext = context
+    }
+
+    override fun onFailed(msg: String?) {
+        Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show()
     }
 
     abstract fun getDatas()
