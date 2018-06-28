@@ -19,11 +19,13 @@ class CacheInterceptor : Interceptor {
                     .build()
 
             var response: Response? = chain.proceed(request)
-            return response!!.newBuilder()
-                    .removeHeader("Pragma")
-                    .removeHeader("Cache-Control")
-                    .header("Cache-Control", "public, max-age=" + maxAge)
-                    .build()
+            return response?.let {
+                it.newBuilder()
+                        .removeHeader("Pragma")
+                        .removeHeader("Cache-Control")
+                        .header("Cache-Control", "public, max-age=" + maxAge)
+                        .build()
+            }!!
         } else {
             val maxSize: Int = 60 * 60 * 24 * 28
             request = request!!.newBuilder()
@@ -33,11 +35,13 @@ class CacheInterceptor : Interceptor {
                     .build()
 
             val response: Response? = chain.proceed(request)
-            return response!!.newBuilder()
-                    .removeHeader("Pragma")
-                    .removeHeader("Cache-Control")
-                    .header("Cache-Control", "public, only-if-cached, max-stale=" + maxSize)
-                    .build()
+            return response?.let {
+                it.newBuilder()
+                        .removeHeader("Pragma")
+                        .removeHeader("Cache-Control")
+                        .header("Cache-Control", "public, only-if-cached, max-stale=" + maxSize)
+                        .build()
+            }!!
         }
     }
 }

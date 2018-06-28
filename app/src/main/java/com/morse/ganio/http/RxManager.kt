@@ -13,11 +13,13 @@ import io.reactivex.disposables.Disposable;
 class RxManager {
     private var mCompositeDisposable: CompositeDisposable = CompositeDisposable()// 管理订阅者者
 
-    fun register(d: Disposable) {
-        mCompositeDisposable.add(d);
+    fun register(d: Disposable?) {
+        d?.let {
+            mCompositeDisposable.addAll(it)
+        }
     }
 
     fun unSubscribe() {
-        mCompositeDisposable.dispose();// 取消订阅
+        mCompositeDisposable.dispose()// 取消订阅
     }
 }

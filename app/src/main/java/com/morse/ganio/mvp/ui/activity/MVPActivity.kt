@@ -31,19 +31,19 @@ open abstract class MVPActivity<V : IView, P : IPresenter<V>> : AppCompatActivit
         super.onDestroy()
     }
 
-    override fun createPresenter(): P {
-        return this!!.p!!
+    override fun createPresenter(): P? {
+        return p
     }
 
-    override fun getPresenter(): P {
-        return this!!.p!!
+    override fun getPresenter(): P? {
+        return p
     }
 
     override fun setPresenter(p: P?) {
-        this!!.p = p!!
+        this?.p = p
     }
 
-    override fun getMVPView(): V {
+    override fun getMVPView(): V? {
         return this as V
     }
 

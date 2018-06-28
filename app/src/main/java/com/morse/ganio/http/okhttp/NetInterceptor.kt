@@ -7,24 +7,26 @@ import okhttp3.Interceptor
 import okhttp3.Request
 import okhttp3.Response
 
-class NetInterceptor :Interceptor{
+class NetInterceptor : Interceptor {
     override fun intercept(chain: Interceptor.Chain?): Response {
-        val maxAge=60
-        var request:Request?=chain!!.request()
+        val maxAge = 60
+        var request: Request? = chain!!.request()
 
-        if(NetworkConnectionUtils.isNetworkConnected(AppUtils.getContext()!!)){
-            request=request!!.newBuilder()
+        if (NetworkConnectionUtils.isNetworkConnected(AppUtils.getContext()!!)) {
+            request = request!!.newBuilder()
                     .removeHeader("User-Agent")
-                    .header("User-Agent",getUserAgent())
+                    .header("User-Agent", getUserAgent())
                     .build()
 
-            var response:Response?=chain.proceed(request)
-            return response!!.newBuilder()
-                    .removeHeader("Pragma")
-                    .removeHeader("Cache-Control")
-                    .header("Cache-Control","public, max-age=" + maxAge)
-                    .build()
-        }else{
+            var response: Response? = chain.proceed(request)
+            return response?.let {
+                it.newBuilder()
+                        .removeHeader("Pragma")
+                        .removeHeader("Cache-Control")
+                        .header("Cache-Control", "public, max-age=" + maxAge)
+                        .build()
+            }!!
+        } else {
             throw NullPointerException("")
         }
     }

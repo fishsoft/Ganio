@@ -10,7 +10,7 @@ class MainPresenter : BasePresenter<IMain> {
         model = MainModel()
     }
 
-    fun getMain(){
+    fun getMain() {
         model!!.getMain()
     }
 

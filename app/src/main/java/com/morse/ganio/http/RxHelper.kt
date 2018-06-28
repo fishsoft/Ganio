@@ -34,15 +34,17 @@ class RxHelper {
          * @param t
          * @return Flowable
          */
+        @Throws(Exception::class)
         fun <T : Any?> createFlowable(t: T?): Flowable<T> {
             return Flowable.create(FlowableOnSubscribe<T>() {
-                @Throws(Exception::class)
-                fun subscribe(emitter: FlowableEmitter<T>) {
-                    try {
-                        emitter.onNext(t!!);
-                        emitter.onComplete();
-                    } catch (e: Exception) {
-                        emitter.onError(e);
+                try {
+                    it?.let {
+                        it.onNext(t!!)
+                        it.onComplete()
+                    }
+                } catch (e: Exception) {
+                    it?.let {
+                        it.onError(e)
                     }
                 }
             }, BackpressureStrategy.BUFFER);
@@ -54,18 +56,20 @@ class RxHelper {
          * @param t
          * @return Flowable
          */
+        @Throws(Exception::class)
         fun <T : Any?> createObservable(t: T): Observable<T> {
             return Observable.create(ObservableOnSubscribe<T>() {
-                @Throws(Exception::class)
-                fun subscribe(emitter: ObservableEmitter<T>) {
-                    try {
-                        emitter.onNext(t);
-                        emitter.onComplete();
-                    } catch (e: Exception) {
-                        emitter.onError(e);
+                try {
+                    it?.let {
+                        it.onNext(t!!)
+                        it.onComplete()
+                    }
+                } catch (e: Exception) {
+                    it?.let {
+                        it.onError(e)
                     }
                 }
-            });
+            })
         }
     }
 }

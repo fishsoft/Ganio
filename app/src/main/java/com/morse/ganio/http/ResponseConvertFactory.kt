@@ -15,7 +15,7 @@ import retrofit2.Retrofit;
 
 class ResponseConvertFactory private constructor(val gson: Gson) : Converter.Factory() {
 
-    private var mGson:Gson?=gson
+    private var mGson: Gson? = gson
 
     companion object {
 
@@ -26,10 +26,9 @@ class ResponseConvertFactory private constructor(val gson: Gson) : Converter.Fac
         fun create(gson: Gson): ResponseConvertFactory {
             return ResponseConvertFactory(gson)
         }
-
-        fun responseBodyConverter(type: Type, annotations: Array<Annotation>, retrofit: Retrofit): Converter<ResponseBody, *> {
-            return GsonResponseBodyConverter<Any>(gson = Gson()!!, type = type);
-        }
     }
 
+    override fun responseBodyConverter(type: Type?, annotations: Array<out kotlin.Annotation>?, retrofit: Retrofit?): Converter<ResponseBody, *>? {
+        return GsonResponseBodyConverter<Any>(gson = Gson()!!, type = type!!)
+    }
 }

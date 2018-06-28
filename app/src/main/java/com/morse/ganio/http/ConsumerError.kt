@@ -14,15 +14,15 @@ class ConsumerError : Consumer<Throwable> {
     private var view: IView? = null
 
     constructor(v: IView) {
-        view = v;
+        view = v
     }
 
     @Throws(Exception::class)
     override fun accept(t: Throwable?) {
         if (t is SocketTimeoutException) {
-            view!!.onFailed("连接服务器超时");
+            view?.onFailed("连接服务器超时")
         } else if (t is ApiException) {
-            view!!.onFailed(t.message);
+            view?.onFailed(t.message)
         }
     }
 }

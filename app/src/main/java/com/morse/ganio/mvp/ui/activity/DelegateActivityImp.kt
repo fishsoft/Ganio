@@ -12,7 +12,7 @@ class DelegateActivityImp<V : IView, P : IPresenter<V>> : DelegateActivity {
 
     private var callback: MVPCallbackImp<V, P>? = null
 
-    constructor(callback: MVPCallback<V, P>) {
+    constructor(callback: MVPCallback<V, P>?) {
         this!!.callback = MVPCallbackImp(callback)
     }
 

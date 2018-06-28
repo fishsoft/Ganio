@@ -13,25 +13,26 @@ import java.lang.reflect.Type
  */
 
 class GsonResponseBodyConverter<T> : Converter<ResponseBody, T> {
-    private val gson: Gson;
-    private val type: Type;
+    private val gson: Gson
+    private val type: Type
 
     constructor(gson: Gson, type: Type) {
-        this.gson = gson;
-        this.type = type;
+        this.gson = gson
+        this.type = type
     }
 
     @Throws(IOException::class)
     override fun convert(value: ResponseBody): T {
-        var response: String = value.string();
-        Log.d("Network", "response>>" + response);
+        var response: String = value.string()
+        Log.d("Network", "response>>" + response)
         //httpResult 只解析result字段
 
         val httpResult: BaseResponse<*>? = gson.fromJson(response, BaseResponse::class.java)
         //
-        if (httpResult!!.getCode() != 200) {
-            throw ApiException(httpResult.getCode());
+        if (httpResult?.error!!) {
+//            throw ApiException(httpResult.code)
+            throw NullPointerException("获取数据失败") as Throwable
         }
-        return gson.fromJson(response, type);
+        return gson.fromJson(response, type)
     }
 }

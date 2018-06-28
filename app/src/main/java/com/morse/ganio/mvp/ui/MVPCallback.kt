@@ -11,12 +11,12 @@ interface MVPCallback<V : IView, P : IPresenter<V>> {
     /**
      * 创建Presenter
      */
-    fun createPresenter(): P
+    fun createPresenter(): P?
 
     /**
      * 获取Presenter
      */
-    fun getPresenter(): P
+    fun getPresenter(): P?
 
     /**
      * 设置Presenter
@@ -26,6 +26,6 @@ interface MVPCallback<V : IView, P : IPresenter<V>> {
     /**
      * 获取View接口
      */
-    fun getMVPView(): V
+    fun getMVPView(): V?
 
 }

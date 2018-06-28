@@ -18,8 +18,10 @@ class MainAdapter(manager: FragmentManager, num: Int) : FragmentPagerAdapter(man
         for (i in 0..num) fragments!!.add(GankFragment.getInstance(i))
     }
 
-    override fun getItem(position: Int): Fragment {
-        return fragments!![position]
+    override fun getItem(position: Int): Fragment? {
+        return fragments?.let {
+            it[position]
+        }
     }
 
     override fun getCount(): Int {

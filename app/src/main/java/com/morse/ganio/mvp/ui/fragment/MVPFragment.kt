@@ -23,11 +23,11 @@ open abstract class MVPFragment<V : IView, P : IPresenter<V>> : Fragment(), IVie
     private var isCreate: Boolean? = false
     private var isShow: Boolean? = false
 
-    private var mContext: Context? = null
+    protected var mContext: Context? = null
 
     private fun getDelegateFragment(): DelegateFragmentImp<V, P> {
         delegateFragment = DelegateFragmentImp(this)
-        return this!!.delegateFragment!!
+        return delegateFragment!!
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,28 +37,19 @@ open abstract class MVPFragment<V : IView, P : IPresenter<V>> : Fragment(), IVie
         super.onCreate(savedInstanceState)
     }
 
-    override fun createPresenter(): P {
-        return this!!.p!!
+    override fun createPresenter(): P? {
+        return p
     }
 
-    override fun getPresenter(): P {
-        return this!!.p!!
+    override fun getPresenter(): P? {
+        return p
     }
 
     override fun setPresenter(p: P?) {
-        if (null == this) {
-            Log.d("morse", "this is null")
-        }
-        if (null == this!!.p) {
-            Log.d("morse", "this.p is null")
-        }
-        if (null == p) {
-            Log.d("morse", "p is null")
-        }
-        this!!.p = p!!
+        this?.p=p
     }
 
-    override fun getMVPView(): V {
+    override fun getMVPView(): V? {
         return this as V
     }
 
@@ -69,7 +60,7 @@ open abstract class MVPFragment<V : IView, P : IPresenter<V>> : Fragment(), IVie
 
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
         if (isCreate!! && isShow!!) {
-            getDatas()
+            getDatas(1)
         }
     }
 
@@ -82,5 +73,5 @@ open abstract class MVPFragment<V : IView, P : IPresenter<V>> : Fragment(), IVie
         Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show()
     }
 
-    abstract fun getDatas()
+    abstract fun getDatas(page: Int)
 }

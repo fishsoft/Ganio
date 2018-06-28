@@ -8,7 +8,7 @@ interface IPresenter<V : IView> {
     /**
      * 绑定视图
      */
-    fun attachView(v: V)
+    fun attachView(v: V?)
 
     /**
      * 解绑视图

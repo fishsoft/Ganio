@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit
 
 class RetrofitCreateHelper {
 
-    private var retrofit: Retrofit? = null;
+    private var retrofit: Retrofit? = null
 
     private constructor() {
         val okHttpClient: OkHttpClient = OkHttpClient.Builder()
@@ -45,17 +45,35 @@ class RetrofitCreateHelper {
     }
 
     companion object {
-        fun get(): RetrofitCreateHelper {
-            return Instance.user
+        val INSTANCE by lazy(mode = LazyThreadSafetyMode.SYNCHRONIZED) { RetrofitCreateHelper() }
+
+//        @Volatile
+//        private var INSTANCE1:RetrofitCreateHelper?=null
+//
+//        fun get():RetrofitCreateHelper{
+//            if(null==INSTANCE1){
+//                synchronized(RetrofitCreateHelper::class){
+//                    if(null==INSTANCE1){
+//                        INSTANCE1= RetrofitCreateHelper()
+//                    }
+//                }
+//            }
+//            return INSTANCE1!!
+//        }
+    }
+
+//    companion object {
+//        fun get() = Instance.INSTANCE
+//    }
+//
+//    private object Instance {
+//        val INSTANCE = RetrofitCreateHelper()
+//    }
+
+    fun <T : Any?> createApi(clazz: Class<T>): T? {
+        return retrofit?.let {
+            it.create(clazz)
         }
-    }
-
-    private object Instance {
-        val user = RetrofitCreateHelper()
-    }
-
-    fun <T : Any?> createApi(clazz: Class<T>): T {
-        return retrofit!!.create(clazz)
     }
 }
 

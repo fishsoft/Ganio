@@ -12,5 +12,6 @@ class GanApp : Application() {
     companion object {
         private var app: Application? = null
         fun getApp() = this.app
+
     }
 }

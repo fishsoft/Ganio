@@ -6,8 +6,7 @@ class NetworkConnectionUtils {
 
     companion object {
         fun isNetworkConnected(context: Context): Boolean {
-
-            return false
+            return true
         }
     }
 }

@@ -12,16 +12,20 @@ class DelegateFragmentImp<V : IView, P : IPresenter<V>> : DelegateFragment {
 
     private var callback: MVPCallbackImp<V, P>? = null
 
-    constructor(callback: MVPCallback<V, P>) {
+    constructor(callback: MVPCallback<V, P>?) {
         this.callback = MVPCallbackImp(callback)
     }
 
     override fun onCreateView() {
-        callback!!.createPresenter()
-        callback!!.attach()
+        callback?.let {
+            it.createPresenter()
+            it.attach()
+        }
     }
 
     override fun onDestroy() {
-        callback!!.dettach()
+        callback?.let {
+            it.dettach()
+        }
     }
 }

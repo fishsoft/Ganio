@@ -20,7 +20,7 @@ class TrustManager {
          *
          * @return
          */
-        fun getUnsafeOkHttpClient(): SSLSocketFactory {
+        fun getUnsafeOkHttpClient(): SSLSocketFactory? {
             try {
                 // Create a trust manager that does not validate certificate chains
                 val trustAllCerts = arrayOf<X509TrustManager>(object : X509TrustManager {

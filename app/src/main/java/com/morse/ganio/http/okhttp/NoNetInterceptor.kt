@@ -19,12 +19,14 @@ class NoNetInterceptor : Interceptor {
                     .header("User-Agent", getUserAgent())
                     .build()
 
-            var response: Response = chain.proceed(request)
-            return response.newBuilder()
-                    .removeHeader("Pragma")
-                    .removeHeader("Cache-Control")
-                    .header("Cache-Control", "public, only-if-cached, max-stale=" + maxSize)
-                    .build()
+            var response: Response? = chain.proceed(request)
+            return response?.let {
+                it.newBuilder()
+                        .removeHeader("Pragma")
+                        .removeHeader("Cache-Control")
+                        .header("Cache-Control", "public, only-if-cached, max-stale=" + maxSize)
+                        .build()
+            }!!
         }
 
         return chain.proceed(request)

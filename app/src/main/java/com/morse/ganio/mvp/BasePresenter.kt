@@ -1,25 +1,24 @@
 package com.morse.ganio.mvp
 
 import java.lang.ref.WeakReference
-import java.lang.reflect.InvocationHandler
-import java.lang.reflect.Method
-import java.lang.reflect.Proxy
 
 /**
  * Presenter基类
  */
-open abstract class BasePresenter<V : IView> : IPresenter<V> {
+abstract class BasePresenter<V : IView> : IPresenter<V> {
 
-    var v: WeakReference<V>? = null
-    var proxy: IView? = null
+    var v: WeakReference<V>?? = null
+    var proxy: V? = null
 
     fun getView(): IView? {
-        return this!!.proxy
+        return proxy?.let { it }
     }
 
-    override fun attachView(v: V) {
-        this.v = WeakReference(v)
-        proxy = Proxy.newProxyInstance(v.javaClass.classLoader, v.javaClass.interfaces) { proxy, method, args -> method!!.invoke(v, args) } as IView?
+    override fun attachView(v: V?) {
+        v?.let {
+            this@BasePresenter?.v = WeakReference(v!!)
+            proxy = this@BasePresenter?.v?.get()
+        }
     }
 
     override fun dettechView() {
